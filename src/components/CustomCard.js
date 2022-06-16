@@ -4,7 +4,7 @@ import Card from "react-bootstrap/Card";
 
 const CustomCard = () => {
   return (
-    <Card style={{ width: "18rem" }}>
+    <Card style={{ width: "18rem" }} className="mt-3">
       <Card.Img variant="top" src="holder.js/100px180" />
       <Card.Body>
         <Card.Title>Card Title</Card.Title>
