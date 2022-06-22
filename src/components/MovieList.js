@@ -1,19 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
+
 import CustomCard from "./CustomCard";
 
-const MovieList = () => {
+const MovieList = ({ movieList }) => {
+  const [displayList, setDisplayList] = useState(movieList);
+  useEffect(() => {
+    setDisplayList(movieList);
+  }, [movieList]);
+
+  const filterMovie = (mood) => {
+    if (mood === "all") {
+      return setDisplayList(movieList);
+    }
+    const tempArg = movieList.filter((item) => item.mood === mood);
+    setDisplayList(tempArg);
+  };
   return (
     <div>
       <Row>
         <Col className="d-flex justify-content-between">
           {" "}
           <ButtonGroup aria-label="Basic example">
-            <Button variant="primary">All</Button>
-            <Button variant="success">Happy</Button>
-            <Button variant="danger">Romantic</Button>
+            <Button variant="primary" onClick={() => filterMovie("all")}>
+              All
+            </Button>
+            <Button variant="success" onClick={() => filterMovie("happy")}>
+              Happy
+            </Button>
+            <Button variant="danger" onClick={() => filterMovie("romantic")}>
+              Romantic
+            </Button>
           </ButtonGroup>{" "}
           <ButtonGroup aria-label="Basic example">
             <Button variant="secondary">Grid</Button>
@@ -23,13 +42,9 @@ const MovieList = () => {
       </Row>
       <Row className="mt-5">
         <Col className="d-flex justify-content-around flex-wrap">
-          <CustomCard></CustomCard>
-          <CustomCard></CustomCard>
-          <CustomCard></CustomCard>
-          <CustomCard></CustomCard>
-          <CustomCard></CustomCard>
-          <CustomCard></CustomCard>
-          <CustomCard></CustomCard>
+          {displayList.map((item, i) => (
+            <CustomCard movie={item}></CustomCard>
+          ))}
         </Col>
       </Row>
     </div>

@@ -2,17 +2,29 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-const CustomCard = () => {
+const CustomCard = ({ movie = {}, func }) => {
+  const { Title, Poster, imdbRating } = movie;
+
   return (
     <Card style={{ width: "18rem" }} className="mt-3">
-      <Card.Img variant="top" src="holder.js/100px180" />
+      <Card.Img variant="top" src={Poster} />
       <Card.Body>
-        <Card.Title>Card Title</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+        <Card.Title>{Title}</Card.Title>
+        <Card.Title>{imdbRating}</Card.Title>
+        <div className="d-flex justify-content-between mt-3">
+          <Button
+            variant="success"
+            onClick={() => func({ ...movie, mood: "happy" })}
+          >
+            Happy List
+          </Button>
+          <Button
+            variant="danger"
+            onClick={() => func({ ...movie, mood: "romantic" })}
+          >
+            Romantic
+          </Button>
+        </div>
       </Card.Body>
     </Card>
   );
