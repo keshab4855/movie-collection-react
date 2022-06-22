@@ -4,8 +4,10 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 
 import CustomCard from "./CustomCard";
+import CustomList from "./CustomList";
 const MovieList = ({ movieList, deleteMovie }) => {
   const [displayList, setDisplayList] = useState(movieList);
+  const [view, setView] = useState("grid");
   useEffect(() => {
     setDisplayList(movieList);
   }, [movieList]);
@@ -36,20 +38,32 @@ const MovieList = ({ movieList, deleteMovie }) => {
             </Button>
           </ButtonGroup>{" "}
           <ButtonGroup aria-label="Basic example">
-            <Button variant="secondary">Grid</Button>
-            <Button variant="secondary">List</Button>
+            <Button variant="primary" onClick={() => setView("grid")}>
+              Grid
+            </Button>
+            <Button variant="success" onClick={() => setView("list")}>
+              List
+            </Button>
           </ButtonGroup>
         </Col>
       </Row>
       <Row className="mt-5">
         <Col className="d-flex justify-content-around flex-wrap">
-          {displayList.map((item, i) => (
-            <CustomCard
-              key={i}
-              movie={item}
-              deleteMovie={deleteMovie}
-            ></CustomCard>
-          ))}
+          {displayList.map((item, i) =>
+            view === "grid" ? (
+              <CustomCard
+                key={i}
+                movie={item}
+                deleteMovie={deleteMovie}
+              ></CustomCard>
+            ) : (
+              <CustomList
+                key={i}
+                movie={item}
+                deleteMovie={deleteMovie}
+              ></CustomList>
+            )
+          )}
         </Col>
       </Row>
     </div>
