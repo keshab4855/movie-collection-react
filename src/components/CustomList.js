@@ -11,7 +11,7 @@ const CustomList = ({ movie = {}, func, inSearchForm, deleteMovie }) => {
       className="mt-3 d-flex flex-row justify-content-between"
     >
       <div style={{ width: "500px" }}>
-        <Card.Img variant="top" src={Poster} width="500px" />
+        <Card.Img variant="top" src={Poster} />
       </div>
       <Card.Body>
         <Card.Title>{Title}</Card.Title>

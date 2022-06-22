@@ -7,7 +7,7 @@ const CustomCard = ({ movie = {}, func, inSearchForm, deleteMovie }) => {
 
   return (
     <Card style={{ width: "18rem" }} className="mt-3">
-      <Card.Img variant="top" src={Poster} />
+      <Card.Img variant="top" src={Poster} style={{ height: "18rem" }} />
       <Card.Body>
         <Card.Title>{Title}</Card.Title>
         <Card.Title>{imdbRating}</Card.Title>
