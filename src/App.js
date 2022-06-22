@@ -22,7 +22,10 @@ function App() {
     setMovieList([...movieList, movie]);
     setMovie({});
   };
-
+  const deleteMovie = (imdbID) => {
+    const filteredArg = movieList.filter((item) => item.imdbID !== imdbID);
+    setMovieList(filteredArg);
+  };
   return (
     <div className="wrapper">
       <Container>
@@ -30,14 +33,18 @@ function App() {
         <div className="mt-4 d-flex justify-content-center">
           <div>
             {movie.imdbID && (
-              <CustomCard movie={movie} func={movieSelect}></CustomCard>
+              <CustomCard
+                movie={movie}
+                func={movieSelect}
+                inSearchForm={true}
+              ></CustomCard>
             )}
             {showError && <Alert variant="danger">{showError}</Alert>}
           </div>
         </div>
         <hr />
 
-        <MovieList movieList={movieList}></MovieList>
+        <MovieList movieList={movieList} deleteMovie={deleteMovie}></MovieList>
       </Container>
     </div>
   );

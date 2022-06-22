@@ -4,8 +4,7 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 
 import CustomCard from "./CustomCard";
-
-const MovieList = ({ movieList }) => {
+const MovieList = ({ movieList, deleteMovie }) => {
   const [displayList, setDisplayList] = useState(movieList);
   useEffect(() => {
     setDisplayList(movieList);
@@ -18,9 +17,11 @@ const MovieList = ({ movieList }) => {
     const tempArg = movieList.filter((item) => item.mood === mood);
     setDisplayList(tempArg);
   };
+
   return (
     <div>
       <Row>
+        <p>{displayList.length} movies found</p>
         <Col className="d-flex justify-content-between">
           {" "}
           <ButtonGroup aria-label="Basic example">
@@ -43,7 +44,11 @@ const MovieList = ({ movieList }) => {
       <Row className="mt-5">
         <Col className="d-flex justify-content-around flex-wrap">
           {displayList.map((item, i) => (
-            <CustomCard movie={item}></CustomCard>
+            <CustomCard
+              key={i}
+              movie={item}
+              deleteMovie={deleteMovie}
+            ></CustomCard>
           ))}
         </Col>
       </Row>
